@@ -7,14 +7,18 @@
     <title>فرسان السرايا</title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Use Inter font for clean modern look -->
+    <!-- Use Inter font for clean modern look (Latin/Numbers) -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap">
+    <!-- Load Tajawal font for better Arabic readability -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700;800&display=swap">
     <style>
         /* Define custom colors */
         .bg-maroon { background-color: #A92B45; }
         .text-maroon { color: #A92B45; }
         .border-maroon { border-color: #A92B45; }
         .font-inter { font-family: 'Inter', sans-serif; }
+        /* Custom font class for the Arabic title */
+        .font-tajawal-title { font-family: 'Tajawal', sans-serif; }
         
         /* Responsive card shadow for aesthetics */
         .card-shadow {
@@ -29,7 +33,17 @@
         }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center font-inter p-4 sm:p-8">
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center font-inter p-4 sm:p-8">
+
+    <!-- LOGO/BRAND HEADER (OUTSIDE THE CARD) -->
+    <div class="w-full max-w-5xl mb-8 flex justify-center items-center px-4">
+        <img id="universityLogo" 
+            src="img/logo.png" 
+            alt="Saraya Hamra University Logo"
+            class="w-full max-w-lg h-auto object-contain"
+            onerror="console.error('Image failed to load at path: img/logo.png. Check file name and path structure.'); this.style.display='none';">
+    </div>
+    <!-- END LOGO/BRAND HEADER -->
 
     <div class="main-wrapper w-full flex items-center justify-center">
 
@@ -39,19 +53,20 @@
             <!-- Accent Bar: Horizontal on Mobile, Vertical (w-16) on Desktop -->
             <div class="bg-maroon w-full h-14 md:w-16 md:h-auto flex-shrink-0 flex items-center justify-center text-white p-2">
                 <!-- Mobile Title (Horizontal) -->
-                <h1 class="text-xl font-extrabold block md:hidden">فرسان السرايا</h1>
+                <h1 class="text-xl font-extrabold block md:hidden font-tajawal-title">فرسان السرايا</h1>
                 <!-- Desktop Title (Vertical) -->
-                <h1 class="vertical-text-desktop text-2xl font-extrabold hidden md:block flex-grow flex items-center justify-center">فرسان السرايا</h1>
+                <h1 class="vertical-text-desktop text-2xl font-extrabold hidden md:block flex-grow flex items-center justify-center font-tajawal-title">فرسان السرايا</h1>
             </div>
 
             <!-- Main Content Area (Contact List) -->
-            <div class="p-4 sm:p-8 flex-grow flex flex-col relative">
+            <div class="p-4 sm:p-8 flex-grow flex flex-col">
 
                 <!-- Inner Content (Contact Columns: Stacks on Mobile, Columns on Desktop) -->
                 <div class="flex-grow flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-8">
                     
-                    <!-- Contact Column 1 (Full width on mobile) -->
+                    <!-- Contact Column 1: Now contains 3 contacts (Marwan, Sanad, Abdulmajid) -->
                     <div class="flex-1 space-y-6 sm:space-y-8 lg:space-y-10">
+                        
                         <!-- Marwan Elamami -->
                         <div class="text-left border-b pb-4 border-maroon/20">
                             <p class="font-bold text-base sm:text-lg text-maroon font-inter">Marwan Elamami</p>
@@ -70,8 +85,8 @@
                             </a>
                         </div>
 
-                        <!-- Sanad ben Eltaif -->
-                        <div class="text-left border-b md:border-b-0 pb-4 md:pb-0 border-maroon/20">
+                        <!-- Sanad ben Eltaif (Border adjusted to separate from Abdulmajid on all screens) -->
+                        <div class="text-left border-b pb-4 border-maroon/20">
                             <p class="font-bold text-base sm:text-lg text-maroon font-inter">Sanad ben Eltaif</p>
                             <p class="text-lg sm:text-xl font-extrabold mb-1">سند بن لطيف</p>
                             <a href="tel:+960944537604" class="flex items-center justify-start text-xs sm:text-sm hover:text-maroon transition duration-150">
@@ -87,18 +102,9 @@
                                 sanad2010478@gmail.com
                             </a>
                         </div>
-                    </div>
 
-                    <!-- Vertical Divider (Desktop Only) -->
-                    <div class="hidden md:block w-px bg-gray-200"></div>
-                    
-                    <!-- Horizontal Divider (Mobile Only) -->
-                    <div class="block md:hidden w-full h-px bg-gray-200"></div>
-
-                    <!-- Contact Column 2 (Full width on mobile) -->
-                    <div class="flex-1 space-y-6 sm:space-y-8 lg:space-y-10">
-                        <!-- Abdulmajid Mraied (Moved up for better flow on mobile) -->
-                        <div class="text-left border-b pb-4 border-maroon/20">
+                        <!-- Abdulmajid Mraied (MOVED HERE - last item in column 1, so no bottom border) -->
+                        <div class="text-left">
                             <p class="font-bold text-base sm:text-lg text-maroon font-inter">Abdulmajid Mraied</p>
                             <p class="text-lg sm:text-xl font-extrabold mb-1">عبدالمجيد المريض</p>
                             <a href="tel:+960915177136" class="flex items-center justify-start text-xs sm:text-sm hover:text-maroon transition duration-150">
@@ -114,8 +120,18 @@
                                 a.mraied@outlook.com
                             </a>
                         </div>
+                    </div>
 
-                        <!-- Bushra Abdulqaer -->
+                    <!-- Vertical Divider (Desktop Only) -->
+                    <div class="hidden md:block w-px bg-gray-200"></div>
+                    
+                    <!-- Horizontal Divider (Mobile Only) -->
+                    <div class="block md:hidden w-full h-px bg-gray-200"></div>
+
+                    <!-- Contact Column 2: Now contains 2 contacts (Bushra, Raghad) -->
+                    <div class="flex-1 space-y-6 sm:space-y-8 lg:space-y-10">
+                        
+                        <!-- Bushra Abdulqaer (Now the first item in the column, needs a border) -->
                         <div class="text-left border-b pb-4 border-maroon/20">
                             <p class="font-bold text-base sm:text-lg text-maroon font-inter">Bushra Abdulqaer</p>
                             <p class="text-lg sm:text-xl font-extrabold mb-1">بشرى عبدالقادر</p>
@@ -133,7 +149,7 @@
                             </a>
                         </div>
 
-                        <!-- Raghad Elaghel -->
+                        <!-- Raghad Elaghel (Now the last item in the column, no border) -->
                         <div class="text-left">
                             <p class="font-bold text-base sm:text-lg text-maroon font-inter">Raghad Elaghel</p>
                             <p class="text-lg sm:text-xl font-extrabold mb-1">رغد العاقل</p>
@@ -152,11 +168,6 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Image Placeholder for User's Logo (Bottom Left of the content area) -->
-                <img id="userLogo" src="./img/logo.png" alt="Company Logo"
-                    class="mt-6 w-16 h-16 object-contain opacity-70 transition-opacity duration-300"
-                    onerror="this.style.display='none'; this.classList.add('hidden');">
             </div>
 
         </div>
