@@ -21,90 +21,41 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
 
-        /* Custom style for the vertical Arabic text on the thin bar */
-        .vertical-text {
+        /* Custom style for the vertical Arabic text (Desktop Only) */
+        .vertical-text-desktop {
             writing-mode: vertical-rl; /* Write text vertically, right to left */
             transform: rotate(180deg); /* Rotate 180 degrees to flip the text direction */
             white-space: nowrap; /* Prevent line breaks */
         }
-
-        /* --- LANDSCAPE EMULATION FOR MOBILE PORTRAIT --- */
-        /* This media query targets small screens (max-width: 640px) held in portrait orientation */
-        @media (max-width: 640px) and (orientation: portrait) {
-            body {
-                /* Override default padding and enforce full screen size */
-                min-height: 100vh;
-                width: 100vw;
-                overflow: hidden; /* Hide scrollbars caused by rotation */
-                padding: 0 !important;
-                margin: 0 !important;
-            }
-
-            .main-wrapper {
-                /* FIX: Use position: fixed and 50%/50% to ensure centering on the viewport */
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                
-                /* Swap width (now height of phone) and height (now width of phone) */
-                width: 100vh;
-                height: 100vw;
-                
-                /* CRITICAL FIX: Center-align the element, then rotate it 90 degrees clockwise */
-                transform: translate(-50%, -50%) rotate(90deg);
-                
-                /* Ensure rotation origin is the center (default, but explicit sometimes helps) */
-                transform-origin: center;
-                
-                /* Center the card contents within this rotated space (keep) */
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 1rem;
-                box-sizing: border-box;
-                /* The height/width set here will override the desktop classes below */
-            }
-            
-            .card-shadow {
-                /* Ensure the card is responsive within the rotated space */
-                width: 98vh; /* Adjusted for maximum size while allowing minimal margin/padding */
-                max-width: 100%;
-                max-height: 90%;
-            }
-        }
-        /* --- END LANDSCAPE EMULATION --- */
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center font-inter">
+<body class="bg-gray-100 min-h-screen flex items-center justify-center font-inter p-4 sm:p-8">
 
-    <div class="main-wrapper w-full p-4 flex items-center justify-center">
+    <div class="main-wrapper w-full flex items-center justify-center">
 
-        <!-- Main Card Container: FORCED TO BE HORIZONTAL (flex-row) on all screen sizes -->
-        <div class="card-shadow bg-white rounded-xl overflow-hidden w-full max-w-5xl flex flex-row h-auto md:h-[600px] text-gray-800">
+        <!-- Main Card Container: FLEX-COL on mobile, FLEX-ROW on medium (md) and up -->
+        <div class="card-shadow bg-white rounded-xl overflow-hidden w-full max-w-5xl flex flex-col md:flex-row h-auto md:h-[600px] text-gray-800">
 
-            <!-- Left Sidebar (Maroon Accent Strip) - NOW W-16 (Slightly wider) -->
-            <div class="bg-maroon w-16 flex-shrink-0 p-2 flex flex-col items-center justify-center text-white">
-                <!-- Title is placed here, sideways, and rotated 180 degrees -->
-                <h1 class="vertical-text text-2xl font-extrabold flex-grow flex items-center justify-center">فرسان السرايا</h1>
+            <!-- Accent Bar: Horizontal on Mobile, Vertical (w-16) on Desktop -->
+            <div class="bg-maroon w-full h-14 md:w-16 md:h-auto flex-shrink-0 flex items-center justify-center text-white p-2">
+                <!-- Mobile Title (Horizontal) -->
+                <h1 class="text-xl font-extrabold block md:hidden">فرسان السرايا</h1>
+                <!-- Desktop Title (Vertical) -->
+                <h1 class="vertical-text-desktop text-2xl font-extrabold hidden md:block flex-grow flex items-center justify-center">فرسان السرايا</h1>
             </div>
 
             <!-- Main Content Area (Contact List) -->
             <div class="p-4 sm:p-8 flex-grow flex flex-col relative">
 
-                <div class="mb-6">
-                    <!-- Placeholder space -->
-                </div>
-
-                <!-- Inner Content (Contact Columns) -->
-                <div class="flex-grow flex flex-row space-x-4 md:space-x-8">
+                <!-- Inner Content (Contact Columns: Stacks on Mobile, Columns on Desktop) -->
+                <div class="flex-grow flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-8">
                     
-                    <!-- Contact Column 1 (LEFT alignment applied) -->
-                    <div class="flex-1 space-y-4 sm:space-y-8 lg:space-y-10">
+                    <!-- Contact Column 1 (Full width on mobile) -->
+                    <div class="flex-1 space-y-6 sm:space-y-8 lg:space-y-10">
                         <!-- Marwan Elamami -->
                         <div class="text-left border-b pb-4 border-maroon/20">
                             <p class="font-bold text-base sm:text-lg text-maroon font-inter">Marwan Elamami</p>
                             <p class="text-lg sm:text-xl font-extrabold mb-1">مروان العمامي</p>
-                            <!-- Links: text is on the left, icon on the right, justified to start (left) -->
                             <a href="tel:+960931037929" class="flex items-center justify-start text-xs sm:text-sm hover:text-maroon transition duration-150">
                                 <svg class="w-4 h-4 mr-2 text-maroon flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.83 21 3 13.17 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02l-2.2 2.2z"/>
@@ -120,7 +71,7 @@
                         </div>
 
                         <!-- Sanad ben Eltaif -->
-                        <div class="text-left border-b pb-4 border-maroon/20">
+                        <div class="text-left border-b md:border-b-0 pb-4 md:pb-0 border-maroon/20">
                             <p class="font-bold text-base sm:text-lg text-maroon font-inter">Sanad ben Eltaif</p>
                             <p class="text-lg sm:text-xl font-extrabold mb-1">سند بن لطيف</p>
                             <a href="tel:+960944537604" class="flex items-center justify-start text-xs sm:text-sm hover:text-maroon transition duration-150">
@@ -136,9 +87,18 @@
                                 sanad2010478@gmail.com
                             </a>
                         </div>
+                    </div>
 
-                        <!-- Abdulmajid Mraied -->
-                        <div class="text-left">
+                    <!-- Vertical Divider (Desktop Only) -->
+                    <div class="hidden md:block w-px bg-gray-200"></div>
+                    
+                    <!-- Horizontal Divider (Mobile Only) -->
+                    <div class="block md:hidden w-full h-px bg-gray-200"></div>
+
+                    <!-- Contact Column 2 (Full width on mobile) -->
+                    <div class="flex-1 space-y-6 sm:space-y-8 lg:space-y-10">
+                        <!-- Abdulmajid Mraied (Moved up for better flow on mobile) -->
+                        <div class="text-left border-b pb-4 border-maroon/20">
                             <p class="font-bold text-base sm:text-lg text-maroon font-inter">Abdulmajid Mraied</p>
                             <p class="text-lg sm:text-xl font-extrabold mb-1">عبدالمجيد المريض</p>
                             <a href="tel:+960915177136" class="flex items-center justify-start text-xs sm:text-sm hover:text-maroon transition duration-150">
@@ -154,13 +114,7 @@
                                 a.mraied@outlook.com
                             </a>
                         </div>
-                    </div>
 
-                    <!-- Vertical Divider (Hidden on the smallest screens, visible on sm and up) -->
-                    <div class="hidden sm:block w-px bg-gray-200"></div>
-
-                    <!-- Contact Column 2 (LEFT alignment applied) -->
-                    <div class="flex-1 space-y-4 sm:space-y-8 lg:space-y-10">
                         <!-- Bushra Abdulqaer -->
                         <div class="text-left border-b pb-4 border-maroon/20">
                             <p class="font-bold text-base sm:text-lg text-maroon font-inter">Bushra Abdulqaer</p>
@@ -199,9 +153,9 @@
                     </div>
                 </div>
                 
-                <!-- Image Placeholder for User's Logo (Bottom Left) -->
+                <!-- Image Placeholder for User's Logo (Bottom Left of the content area) -->
                 <img id="userLogo" src="./img/logo.png" alt="Company Logo"
-                    class="absolute bottom-4 left-4 w-16 h-16 object-contain opacity-70 transition-opacity duration-300"
+                    class="mt-6 w-16 h-16 object-contain opacity-70 transition-opacity duration-300"
                     onerror="this.style.display='none'; this.classList.add('hidden');">
             </div>
 
@@ -209,4 +163,3 @@
     </div>
 </body>
 </html>
-
